@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KerridgeAsessment.MainPage"
+             xmlns:viewModel="clr-namespace:KerridgeAsessment.ViewModels"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <viewModel:HomeViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Kerridge"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Welcome to Kerridge: Commecial System"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+            <SearchBar Placeholder="Search for a place" 
+                       x:Name="searchBar"
+                       SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}"/>
+            <Label
+                Text="{Binding Message}"
+                FontSize="18"
+                HorizontalOptions="Center" IsVisible="{Binding IsLoading}"/>
+            <Button
+                Text="Search"
+                Command="{Binding SearchCommand}"
+                CommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}"
+                HorizontalOptions="Center" IsEnabled="{Binding !IsLoading}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
