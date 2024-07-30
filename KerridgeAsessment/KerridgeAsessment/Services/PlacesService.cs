@@ -14,6 +14,10 @@ namespace KerridgeAsessment.Services
         {
             var urlEnconded = UrlEncoder.Default.Encode(searchKey);
             var response = await Get<List<PlaceListItem>>($"api/v1/locations/places?criteria={urlEnconded}");
+            if (response.Data != null) 
+            {
+                response.Data = response.Data.Where(opt => !string.IsNullOrEmpty(opt.PlaceId)).ToList();
+            }
             return response.Data;
         }
 
